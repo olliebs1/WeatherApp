@@ -27,13 +27,19 @@ window.addEventListener('load', () => {
           temperatureDegree.textContent = temperature;
           temperatureDescription.textContent = summary;
           locationTimezone.textContent = data.timezone;
+
+          let celsius = (temperature - 32) * (5 / 9);
+
           setIcons(icon, document.querySelector(".icon"));
 
           temperatureSection.addEventListener('click', () => {
             if (temperatureSpan.textContent === "F") {
               temperatureSpan.textContent = "C";
+              temperatureDegree.textContent = Math.floor(celsius);
             } else {
               temperatureSpan.textContent = "F";
+              temperatureDegree.textContent = temperature;
+
             }
           })
         });
