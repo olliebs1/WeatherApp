@@ -20,11 +20,12 @@ window.addEventListener('load', () => {
           return response.json();
         })
         .then(data => {
-          const { temperature, summary } = data.currently;
+          const { temperature, summary, icon } = data.currently;
 
           temperatureDegree.textContent = temperature;
           temperatureDescription.textContent = summary;
           locationTimezone.textContent = data.timezone;
+          setIcons(icon, document.querySelector(".icon"));
         });
     });
 
@@ -32,4 +33,11 @@ window.addEventListener('load', () => {
   else {
     h1.textContent = "Please allow location services for this page.";
   }
+  function setIcons(icon, iconID) {
+    const skycons = new Skycons({ color: "white" });
+    const currentIcon = icon.replace(/-/g, "_").toUpperCase();
+    skycons.play();
+    return skycons.set(iconID, Skycons[currentIcon]);
+  }
+
 });
